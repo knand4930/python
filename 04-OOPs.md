@@ -1,6 +1,6 @@
 # Object-Oriented Programming (OOP) in Python
 
-Object-Oriented Programming (OOP) is a programming paradigm that structures code using objects and classes. It makes code **modular, reusable, and maintainable** by following key principles such as **Classes and Objects, Constructors, Inheritance, Polymorphism, Encapsulation, Abstraction, and Magic Methods**.
+Object-Oriented Programming (OOP) is a programming paradigm that structures code using objects and classes. It makes code **modular, reusable, and maintainable** by following key principles such as **Classes and Objects, Constructors, Inheritance, Polymorphism, Encapsulation, Abstraction, Magic Methods, Method Overloading, and the `super` Keyword**.
 
 ## 1. Classes and Objects
 
@@ -171,30 +171,46 @@ print(payment2.process_payment(300))  # Output: Paid 300 via PayPal
 
 ---
 
-## 7. Magic Methods (`__str__`, `__repr__`, etc.)
+## 7. Method Overloading - Multiple Behaviors for the Same Method
 
-Magic methods are special methods in Python that enable object customization, such as defining string representation and operator overloading.
+Method Overloading allows a class to define multiple versions of the same method, differing in the number or type of arguments.
 
 ### Example:
 ```python
-class Book:
-    def __init__(self, title, author):
-        self.title = title
-        self.author = author
+class MathOperations:
+    def add(self, a, b, c=0):  # Default argument for method overloading
+        return a + b + c
 
-    def __str__(self):
-        return f"{self.title} by {self.author}"
-
-    def __repr__(self):
-        return f"Book('{self.title}', '{self.author}')"
-
-book = Book("1984", "George Orwell")
-print(str(book))  # Output: 1984 by George Orwell
-print(repr(book))  # Output: Book('1984', 'George Orwell')
+math_op = MathOperations()
+print(math_op.add(2, 3))      # Output: 5
+print(math_op.add(2, 3, 4))   # Output: 9
 ```
 ✅ **Benefits:**
-- Provides better string representation of objects.
-- Enhances debugging and readability.
+- Provides flexibility to use a method with different argument types.
+- Reduces redundancy in method names.
+
+---
+
+## 8. The `super` Keyword - Accessing Parent Class Methods
+
+The `super` keyword allows a child class to call a method from its parent class.
+
+### Example:
+```python
+class Parent:
+    def show(self):
+        return "This is the parent class"
+
+class Child(Parent):
+    def show(self):
+        return super().show() + " and this is the child class"
+
+child = Child()
+print(child.show())  # Output: This is the parent class and this is the child class
+```
+✅ **Benefits:**
+- Helps in calling parent class methods.
+- Avoids code duplication in child classes.
 
 ---
 
@@ -207,7 +223,8 @@ print(repr(book))  # Output: Book('1984', 'George Orwell')
 | **Polymorphism** | Different classes, same method name | Makes code flexible |
 | **Encapsulation** | Restrict direct access to attributes | Ensures data security |
 | **Abstraction**  | Hide implementation details | Simplifies complexity |
-| **Magic Methods** | Special Python methods (`__str__`, `__repr__`) | Enhances debugging & representation |
+| **Method Overloading** | Same method, different arguments | Provides flexibility |
+| **`super` Keyword** | Access parent class methods | Reduces redundancy |
 
 By combining these principles, OOP ensures a **structured, maintainable, and secure** approach to programming in Python.
 
