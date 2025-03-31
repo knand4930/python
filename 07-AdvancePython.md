@@ -41,7 +41,50 @@ for num in fibonacci(5):
     print(num)
 ```
 
-## 2. Multithreading and Multiprocessing
+## 2. Getters and Iterators
+
+### **Getters**
+Getters are methods that allow controlled access to private attributes in a class.
+
+#### **Example: Using a getter to access a private attribute**
+```python
+class Person:
+    def __init__(self, name):
+        self._name = name  # Private attribute
+
+    @property
+    def name(self):
+        return self._name
+
+person = Person("Alice")
+print(person.name)  # Output: Alice
+```
+
+### **Iterators**
+Iterators allow objects to be traversed using the `__iter__` and `__next__` methods.
+
+#### **Example: Custom iterator for counting**
+```python
+class Counter:
+    def __init__(self, start, end):
+        self.current = start
+        self.end = end
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.current >= self.end:
+            raise StopIteration
+        self.current += 1
+        return self.current - 1
+
+counter = Counter(1, 5)
+for num in counter:
+    print(num)
+```
+
+## 3. Multithreading and Multiprocessing
 
 ### **Multithreading**
 Multithreading allows parallel execution of tasks using threads. However, Python's Global Interpreter Lock (GIL) prevents true parallel execution for CPU-bound tasks.
@@ -89,7 +132,7 @@ process1.join()
 process2.join()
 ```
 
-## 3. Memory Management and Garbage Collection
+## 4. Memory Management and Garbage Collection
 
 Python has automatic memory management, utilizing **reference counting** and **garbage collection**.
 
@@ -132,7 +175,7 @@ del node2
 gc.collect()  # Forces garbage collection
 ```
 
-## 4. Metaclasses
+## 5. Metaclasses
 
 Metaclasses are "classes of classes" that define how a class behaves. They allow modification of class creation.
 
